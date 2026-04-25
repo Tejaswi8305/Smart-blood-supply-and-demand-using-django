@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shortage Alerts</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="shortage-page">
+
+<h2>Live Blood Shortage Alerts</h2>
+
+{% for stock in shortages %}
+<p>
+⚠ Blood Group {{ stock.blood_group }} shortage detected <br>
+Needed: {{ stock.needed }} <br>
+Available: {{ stock.available }} <br>
+Shortage: {{ stock.shortage }}
+</p>
+{% endfor %}
+
+<a href="/">⬅ Back to Home</a>
+
+</body>
+</html>

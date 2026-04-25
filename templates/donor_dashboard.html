@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Dashboard</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<h1>{{ message }}</h1>
+<p>Total Registered Donors: {{ total_donors }}</p>
+
+<h2>Donor Details</h2>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Blood Group</th>
+        <th>Phone</th>
+        <th>City</th>
+    </tr>
+
+    {% for donor in donors_list %}
+    <tr>
+        <td>{{ donor.name }}</td>
+        <td>{{ donor.blood_group }}</td>
+        <td>{{ donor.phone }}</td>
+        <td>{{ donor.city }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
+
+<a href="/donor/">
+    <button>Add New Donor</button>
+</a>
+
+<a href="/login/">
+    <button>Logout</button>
+</a>
+<a href="/">Back to Home</a>
+
+</body>
+</html>

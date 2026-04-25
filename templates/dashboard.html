@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blood Bank Dashboard</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<h1>Smart Blood Bank Dashboard</h1>
+
+<h2>Statistics</h2>
+
+<p>Total Donors: {{ donors }}</p>
+<p>Total Blood Requests: {{ requests }}</p>
+
+<h2>Blood Shortage Alerts</h2>
+
+<table border="1">
+<tr>
+    <th>Month</th>
+    <th>Blood Group</th>
+    <th>Requested</th>
+    <th>Supplied</th>
+    <th>Shortage</th>
+</tr>
+
+{% for row in shortage %}
+<tr>
+    <td>{{ row.Month }}</td>
+    <td>{{ row.Blood_Group }}</td>
+    <td>{{ row.Units_Requested }}</td>
+    <td>{{ row.Units_Supplied }}</td>
+    <td>{{ row.Shortage_Units }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<br>
+
+<h2>Demand Graph</h2>
+
+<img src="/demand_graph/" width="600">
+
+
+
+<div style="text-align:center; margin-top:20px;">
+    <a href="/predict/">
+        <button style="background-color:red; color:white;">🔮 Predict Demand</button>
+    </a>
+
+    <a href="/shortage/">
+        <button style="background-color:red; color:white;">⚠ View Shortage Alerts</button>
+    </a>
+
+    <a href="/donor/">
+        <button style="background-color:red; color:white;">🩸 Add Donor</button>
+    </a>
+
+    <a href="/hospital/">
+        <button style="background-color:red; color:white;">🏥 Request Blood</button>
+    </a>
+</div>
+
+</body>
+</html>

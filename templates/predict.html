@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prediction</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="predict-page">
+
+<h2>Blood Demand Prediction</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Month Input -->
+    <input type="number" id="month" name="month" placeholder="Month (1-12)" onchange="fetchData()">
+
+    <!-- Blood Group Dropdown -->
+    <select id="blood" name="blood_group" onchange="fetchData()">
+        <option value="0">O+</option>
+        <option value="1">A+</option>
+        <option value="2">B+</option>
+        <option value="3">AB+</option>
+        <option value="4">O-</option>
+        <option value="5">A-</option>
+        <option value="6">B-</option>
+        <option value="7">AB-</option>
+    </select>
+
+    <!-- Auto-filled Fields -->
+    <input type="text" id="collected" name="collected" readonly>
+<input type="text" id="supplied" name="supplied" readonly>
+
+    <!-- Submit -->
+    <button type="submit">Predict</button>
+</form>
+
+<!-- Output Section -->
+{% if result %}
+    <h3>Predicted Demand: {{ result }} units</h3>
+    <h3>{{ status }}</h3>
+{% endif %}
+
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<a href="/">⬅ Back to Home</a>
+
+<!-- JavaScript -->
+<script>
+function fetchData() {
+    let month = document.getElementById("month").value;
+    let blood = document.getElementById("blood").value;
+
+    console.log("Month:", month);
+    console.log("Blood:", blood);
+
+    if (month && blood !== "") {
+        fetch(`/get-data/?month=${month}&blood=${blood}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log("API Data:", data);
+
+            document.getElementById("collected").value = data.collected;
+            document.getElementById("supplied").value = data.supplied;
+        })
+        .catch(err => console.log("Error:", err));
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Dashboard</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<h1>{{ message }}</h1>
+<p>Total Blood Requests: {{ total_requests }}</p>
+
+<h2>Request Details</h2>
+
+<table border="1">
+    <tr>
+        <th>Hospital Name</th>
+        <th>Blood Group</th>
+        <th>Units Needed</th>
+        <th>Status</th>
+    </tr>
+
+    {% for req in request_list %}
+    <tr>
+        <td>{{ req.hospital_name }}</td>
+        <td>{{ req.blood_group }}</td>
+        <td>{{ req.units_needed }}</td>
+        <td>{{ req.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>

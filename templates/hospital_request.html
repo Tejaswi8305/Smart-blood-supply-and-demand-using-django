@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hospital Request</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="hospital-page">
+
+<h2>Hospital Blood Request</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="hospital_name" placeholder="Hospital Name" required>
+
+    <select name="blood_group">
+        <option>O+</option>
+        <option>A+</option>
+        <option>B+</option>
+        <option>AB+</option>
+        <option>O-</option>
+        <option>A-</option>
+        <option>B-</option>
+        <option>AB-</option>
+    </select>
+
+    <input type="number" name="units_required" placeholder="Units Required" required>
+
+    <input type="date" name="request_date">
+
+    <button type="submit">Submit Request</button>
+</form>
+
+<br><br>
+
+<a href="/hospital/">
+    <button>New Blood Request</button>
+</a>
+
+<a href="/predict/">
+    <button>Predict Future Demand</button>
+</a>
+
+<a href="/">⬅ Back to Home</a>
+
+</body>
+</html>
